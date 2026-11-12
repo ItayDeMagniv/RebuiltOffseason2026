@@ -42,6 +42,8 @@ public class IndexerSubsystem extends SubsystemBase {
    * tell the hardware to spin forward
    */
   public void spinForward(){
+      if (isDisabled) return;
+  
     io.setDutyCycle(IndexerConstants.DUTY_CYCLE_FORWARD);
   }
 
@@ -49,6 +51,8 @@ public class IndexerSubsystem extends SubsystemBase {
    * tell the hardware to spin backward
    */
   public void spinBackward(){
+      if (isDisabled) return;
+
     io.setDutyCycle(IndexerConstants.DUTY_CYCLE_BACKWARD);
   }
 
@@ -105,7 +109,6 @@ public class IndexerSubsystem extends SubsystemBase {
       this::spinForward,
       this
     );
-  }
-
+  }    
   public Command toggleDisableIndexer() {return Commands.runOnce(()-> isDisabled = !isDisabled);}
 }
